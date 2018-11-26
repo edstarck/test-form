@@ -285,6 +285,7 @@
     <span class="success-msg__replay">Ждите ответа от МФО.</span>
   </div>`;
   const proposal = document.getElementById('proposal');
+  const consent = document.getElementById('consent');
 
   [...inputs].forEach(input => {
     input.addEventListener('focus', function() {
@@ -372,6 +373,10 @@
   }
 
   function showSuccess() {
-    proposal.innerHTML = success;
+    if (consent.checked) {
+      proposal.innerHTML = success;
+    } else {
+      return false;
+    }
   }
 })();

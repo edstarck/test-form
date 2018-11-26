@@ -1,56 +1,3 @@
-const today = (() => {
-  const nowDay = new Date();
-  const day = nowDay.getDate();
-  const month = nowDay.getMonth();
-  const fullYear = nowDay.getFullYear();
-
-  return {
-    day,
-    month,
-    fullYear,
-  };
-})();
-
-function ChekboxAction() {
-  const $ch_shance = document.getElementById('shance');
-  const $ch_consent = document.getElementById('consent');
-  const $ch_error = document.getElementById('checkbox-error');
-  const $box_hidden = document.getElementById('box-up');
-  const $toggle_up = document.querySelector('.js-toggle-checked');
-
-  const slide = () => {
-    let className = $box_hidden.className;
-    if (className.indexOf(' expanded') == -1) {
-      className += ' expanded';
-    } else {
-      $ch_shance.checked = true;
-      className = className.replace(' expanded', '');
-    }
-    $box_hidden.className = className;
-    return false;
-  };
-
-  const showError = () => {
-    if ($ch_consent.checked) {
-      $ch_error.style.cssText = 'display: none';
-    } else {
-      $ch_error.style.cssText = 'display: block';
-    }
-  };
-
-  this.consent = $ch_consent;
-  this.shance = $ch_shance;
-  this.up = $toggle_up;
-  this.error = showError;
-  this.slideToggle = slide;
-}
-
-const action = new ChekboxAction();
-
-action.shance.addEventListener('click', action.slideToggle, false);
-action.up.addEventListener('click', action.slideToggle, false);
-action.consent.addEventListener('click', action.error, false);
-
 class Popup {
   constructor(config = { blur: false }) {
     this.currently_opened = [];
@@ -282,6 +229,59 @@ class Popup {
   });
 })();
 
+const today = (() => {
+  const nowDay = new Date();
+  const day = nowDay.getDate();
+  const month = nowDay.getMonth();
+  const fullYear = nowDay.getFullYear();
+
+  return {
+    day,
+    month,
+    fullYear,
+  };
+})();
+
+function ChekboxAction() {
+  const $ch_shance = document.getElementById('shance');
+  const $ch_consent = document.getElementById('consent');
+  const $ch_error = document.getElementById('checkbox-error');
+  const $box_hidden = document.getElementById('box-up');
+  const $toggle_up = document.querySelector('.js-toggle-checked');
+
+  const slide = () => {
+    let className = $box_hidden.className;
+    if (className.indexOf(' expanded') == -1) {
+      className += ' expanded';
+    } else {
+      $ch_shance.checked = true;
+      className = className.replace(' expanded', '');
+    }
+    $box_hidden.className = className;
+    return false;
+  };
+
+  const showError = () => {
+    if ($ch_consent.checked) {
+      $ch_error.style.cssText = 'display: none';
+    } else {
+      $ch_error.style.cssText = 'display: block';
+    }
+  };
+
+  this.consent = $ch_consent;
+  this.shance = $ch_shance;
+  this.up = $toggle_up;
+  this.error = showError;
+  this.slideToggle = slide;
+}
+
+const action = new ChekboxAction();
+
+action.shance.addEventListener('click', action.slideToggle, false);
+action.up.addEventListener('click', action.slideToggle, false);
+action.consent.addEventListener('click', action.error, false);
+
 flatpickr('#birthdate', {
   allowInput: true,
   dateFormat: 'd.m.Y',
@@ -304,127 +304,6 @@ flatpickr('#dateissue', {
   locale: 'ru',
   minDate: new Date(1997, 0, 1),
   maxDate: new Date(today.fullYear, today.month, today.day),
-});
-
-const phone = document.getElementById('phone');
-const snils = document.getElementById('snils');
-const divisionCode = document.getElementById('divisionCode');
-const series = document.getElementById('series');
-const birthday = document.getElementById('birthdate');
-const dateissue = document.getElementById('dateissue');
-const numberpass = document.getElementById('numberpass');
-
-const momentFormat = 'DD.MM.YYYY';
-
-const phoneMask = new IMask(phone, {
-  mask: [
-    {
-      mask: '+0(000)000-00-00',
-      startsWith: '7',
-      lazy: true,
-    },
-    {
-      mask: '0(000)000-00-00',
-      startsWith: '8',
-      lazy: true,
-    },
-    {
-      mask: '0(000)000-00-00',
-      startsWith: '9',
-      lazy: true,
-    },
-  ],
-  dispatch: function(appended, dynamicMasked) {
-    var number = (dynamicMasked.value + appended).replace(/\D/g, '');
-
-    return dynamicMasked.compiledMasks.find(function(m) {
-      return number.indexOf(m.startsWith) === 0;
-    });
-  },
-});
-
-const snilsMask = new IMask(snils, {
-  mask: '000-000-000-00',
-  lazy: true,
-  placeholderChar: '0',
-});
-
-const divisionMask = new IMask(divisionCode, {
-  mask: '000-000',
-  lazy: true,
-  placeholderChar: '0',
-});
-
-const seriesMask = new IMask(series, {
-  mask: '00 00',
-});
-
-const birthdayMask = new IMask(birthday, {
-  mask: Date,
-  pattern: momentFormat,
-  lazy: true,
-  min: new Date(1946, 0, 1),
-  max: new Date(today.fullYear - 18, today.month, today.day),
-  format: function(date) {
-    return moment(date).format(momentFormat);
-  },
-  parse: function(str) {
-    return moment(str, momentFormat);
-  },
-  blocks: {
-    DD: {
-      mask: IMask.MaskedRange,
-      from: 1,
-      to: 31,
-    },
-    MM: {
-      mask: IMask.MaskedRange,
-      from: 1,
-      to: 12,
-    },
-    YYYY: {
-      mask: IMask.MaskedRange,
-      from: 1946,
-      to: today.fullYear - 18,
-    },
-  },
-});
-
-const dateissueMask = new IMask(dateissue, {
-  mask: Date,
-  pattern: momentFormat,
-  lazy: true,
-  min: new Date(1997, 0, 1),
-  max: new Date(today.fullYear, today.month, today.day),
-  format: function(date) {
-    return moment(date).format(momentFormat);
-  },
-  parse: function(str) {
-    return moment(str, momentFormat);
-  },
-  blocks: {
-    DD: {
-      mask: IMask.MaskedRange,
-      from: 1,
-      to: 31,
-    },
-    MM: {
-      mask: IMask.MaskedRange,
-      from: 1,
-      to: 12,
-    },
-    YYYY: {
-      mask: IMask.MaskedRange,
-      from: 1997,
-      to: today.fullYear,
-    },
-  },
-});
-
-const passMask = new IMask(numberpass, {
-  mask: '000000',
-  lazy: true,
-  placeholderChar: '0',
 });
 
 (function() {
@@ -714,6 +593,7 @@ const passMask = new IMask(numberpass, {
     <span class="success-msg__replay">Ждите ответа от МФО.</span>
   </div>`;
   const proposal = document.getElementById('proposal');
+  const consent = document.getElementById('consent');
 
   [...inputs].forEach(input => {
     input.addEventListener('focus', function() {
@@ -801,6 +681,131 @@ const passMask = new IMask(numberpass, {
   }
 
   function showSuccess() {
-    proposal.innerHTML = success;
+    if (consent.checked) {
+      proposal.innerHTML = success;
+    } else {
+      return false;
+    }
   }
 })();
+
+const phone = document.getElementById('phone');
+const snils = document.getElementById('snils');
+const divisionCode = document.getElementById('divisionCode');
+const series = document.getElementById('series');
+const birthday = document.getElementById('birthdate');
+const dateissue = document.getElementById('dateissue');
+const numberpass = document.getElementById('numberpass');
+
+const momentFormat = 'DD.MM.YYYY';
+
+const phoneMask = new IMask(phone, {
+  mask: [
+    {
+      mask: '+0(000)000-00-00',
+      startsWith: '7',
+      lazy: true,
+    },
+    {
+      mask: '0(000)000-00-00',
+      startsWith: '8',
+      lazy: true,
+    },
+    {
+      mask: '0(000)000-00-00',
+      startsWith: '9',
+      lazy: true,
+    },
+  ],
+  dispatch: function(appended, dynamicMasked) {
+    var number = (dynamicMasked.value + appended).replace(/\D/g, '');
+
+    return dynamicMasked.compiledMasks.find(function(m) {
+      return number.indexOf(m.startsWith) === 0;
+    });
+  },
+});
+
+const snilsMask = new IMask(snils, {
+  mask: '000-000-000-00',
+  lazy: true,
+  placeholderChar: '0',
+});
+
+const divisionMask = new IMask(divisionCode, {
+  mask: '000-000',
+  lazy: true,
+  placeholderChar: '0',
+});
+
+const seriesMask = new IMask(series, {
+  mask: '00 00',
+});
+
+const birthdayMask = new IMask(birthday, {
+  mask: Date,
+  pattern: momentFormat,
+  lazy: true,
+  min: new Date(1946, 0, 1),
+  max: new Date(today.fullYear - 18, today.month, today.day),
+  format: function(date) {
+    return moment(date).format(momentFormat);
+  },
+  parse: function(str) {
+    return moment(str, momentFormat);
+  },
+  blocks: {
+    DD: {
+      mask: IMask.MaskedRange,
+      from: 1,
+      to: 31,
+    },
+    MM: {
+      mask: IMask.MaskedRange,
+      from: 1,
+      to: 12,
+    },
+    YYYY: {
+      mask: IMask.MaskedRange,
+      from: 1946,
+      to: today.fullYear - 18,
+    },
+  },
+});
+
+const dateissueMask = new IMask(dateissue, {
+  mask: Date,
+  pattern: momentFormat,
+  lazy: true,
+  min: new Date(1997, 0, 1),
+  max: new Date(today.fullYear, today.month, today.day),
+  format: function(date) {
+    return moment(date).format(momentFormat);
+  },
+  parse: function(str) {
+    return moment(str, momentFormat);
+  },
+  blocks: {
+    DD: {
+      mask: IMask.MaskedRange,
+      from: 1,
+      to: 31,
+    },
+    MM: {
+      mask: IMask.MaskedRange,
+      from: 1,
+      to: 12,
+    },
+    YYYY: {
+      mask: IMask.MaskedRange,
+      from: 1997,
+      to: today.fullYear,
+    },
+  },
+});
+
+const passMask = new IMask(numberpass, {
+  mask: '000000',
+  lazy: true,
+  placeholderChar: '0',
+});
