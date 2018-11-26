@@ -1,0 +1,35 @@
+@import 'bourbon';
+
+@font-face {
+  font-family: 'Museo';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/MuseoSansCyrl-300/MuseoSansCyrl-300.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'MuseoLight';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/MuseoSansCyrl-100/MuseoSansCyrl-100.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'MuseoBold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/MuseoSansCyrl-900/MuseoSansCyrl-900.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'RobotoBold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/RobotoBold/RobotoBold.woff') format('woff');
+}
+@font-face {
+  font-family: 'RobotoLight';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/RobotoLight/RobotoLight.woff') format('woff');
+}

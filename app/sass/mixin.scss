@@ -1,0 +1,39 @@
+@mixin input-placeholder {
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+@mixin link($color) {
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    color: $color;
+  }
+}
+
+// MEDIA QUERY LESS THAN
+@mixin lt($bp) {
+  @media (max-width: $bp) {
+    @content;
+  }
+}
+
+@mixin gt($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}

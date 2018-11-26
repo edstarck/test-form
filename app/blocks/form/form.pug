@@ -1,0 +1,134 @@
+include ../../blocks/box-hidden/box-hidden
+
+mixin form()
+  +b.FORM(id="form" class="form" action="" method="POST")
+    +e.H3.group-title личные данные
+    +e.group
+      +e.row
+        +e.container
+          label(for="lastname") Фамилия
+          +e.INPUT#lastname.field(type="text" name="lastname" placeholder="Иванов")
+          +e.SPAN.messages
+            +e.SPAN.hint
+              | Подсказка в две строки. Расскажите поподробнее и попросите плательщиков отписаться  в комментариях
+        +e.container
+          label(for="username") Имя
+          +e.INPUT#username.field(type="text" name="username" placeholder="Иван")
+          +e.SPAN.messages
+            +e.SPAN.hint Название подсказки
+        +e.container
+          label(for="middlename") Отчество
+          +e.INPUT#middlename.field(type="text" name="middlename" placeholder="Иванович")
+          +e.SPAN.messages
+            +e.SPAN.hint Название подсказки
+      +e.row
+        +e.container
+          label(for="birthdate") Дата рождения
+          +e.INPUT#birthdate.field(type="text" name="birthdate" placeholder="31.12.1999")
+          +e.SPAN.messages
+            +e.SPAN.hint Название подсказки
+        +e.container
+          label(for="phone") Мобильный телефон
+          +e.INPUT#phone.field(type="text" name="phone" placeholder="+7(000)000-00-00")
+          +e.SPAN.messages
+            +e.SPAN.hint Название подсказки
+        +e.container
+          label(for="email") Электронный адрес
+          +e.INPUT#email.field(type="text" name="email" placeholder="email@mailbox.ru")
+          +e.SPAN.messages
+            +e.SPAN.hint Название подсказки
+      +e.row
+        +e.container
+          label(for="snils") СНИЛС
+          +e.INPUT#snils.field(type="text" name="snils" placeholder="000-000-000-00")
+          +e.SPAN.messages
+            +e.SPAN.hint Название подсказки
+        +e.container._lg
+          label(for="city") Город проживания
+          +e.INPUT#city.field(type="text" name="city" placeholder="Санкт-Петербург")
+          +e.SPAN.messages
+            +e.SPAN.hint 
+              | Подсказка в две строки. Расскажите поподробнее и попросите плательщиков отписаться  в комментариях
+    +e.H3.group-title паспорт
+    +e.group
+      +e.row
+        +e.container._sm
+          label(for="series") Серия
+          +e.INPUT#series.field(type="text" name="series" placeholder="00 00")
+          +e.SPAN.messages
+        +e.container._sm
+          label(for="numberpass") Номер
+          +e.INPUT#numberpass.field(type="text" name="numberpass" placeholder="000000")
+          +e.SPAN.messages
+        +e.container
+          label(for="dateissue") Дата выдачи
+          +e.INPUT#dateissue.field(type="text" name="dateissue" placeholder="31.12.1999")
+          +e.SPAN.messages
+            +e.SPAN.hint Название подсказки
+        +e.container
+          label(for="birthplace") Место рождения
+          +e.INPUT#birthplace.field(type="text" name="birthplace" placeholder="Москва")
+          +e.SPAN.messages
+            +e.SPAN.hint Название подсказки
+      +e.row
+        +e.container
+          label(for="divisionCode") Код подразделения
+          +e.INPUT#divisionCode.field(type="text" name="divisionCode" placeholder="000-000")
+          +e.SPAN.messages
+            +e.SPAN.hint Название подсказки
+        +e.container._lg
+          label(for="issuedby") Кем выдан
+          +e.INPUT#issuedby.field(type="text" name="issuedby" placeholder="Отделение УФМС России по Московской области")
+          +e.SPAN.messages
+            +e.SPAN.hint 
+              | Подсказка в две строки. Расскажите поподробнее и попросите плательщиков отписаться в комментариях
+    +e.H3.group-title адрес регистрации
+    +e.group
+      +e.row
+        +e.container
+          label(for="reg_region") Регион регистрации
+          +e.INPUT#reg_region.field(type="text" name="reg_region" placeholder="Московская область")
+          +e.SPAN.messages
+            +e.SPAN.hint Название подсказки
+        +e.container._lg
+          label(for="city_region") Город регистрации
+          +e.INPUT#city_region.field(type="text" name="city_region" placeholder="Армань")
+          +e.SPAN.messages
+            +e.SPAN.hint Название подсказки
+      +e.row
+        +e.container._lg
+          label(for="str_region") Улица регистрации
+          +e.INPUT#str_region.field(type="text" name="str_region" placeholder="пер, Арманский")
+          +e.SPAN.messages
+            +e.SPAN.hint Название подсказки
+        +e.container._sm
+          label(for="building") Дом
+          +e.INPUT#building.field(type="text" name="building" placeholder="1")
+          +e.SPAN.messages
+        +e.container._sm
+          label(for="flat") Квартира
+          +e.INPUT#flat.field(type="text" name="flat")
+          +e.SPAN.messages
+    +e.group
+      +e.row
+        +e.container._lg
+          +e.LABEL(for="shance" class="checkbox_inner").checkbox-label
+            INPUT(type="checkbox" name="shance" id="shance"  checked)
+            +e.SPAN.checkbox-title
+              | Автоматически увеличить шанс на одобрение заявки, 
+              +e.SPAN.checkbox-subtitle получив ответ от нескольких МФО.
+            +e.SPAN.messages            
+          +box-hidden
+      +e.row
+        +e.container._lg
+          +e.SPAN(id="checkbox-error" class="checkbox-error")
+            | Мы не можем отправить вашу заявку, пока вы не дадите согласие передать свои личные данные на обработку.
+          INPUT(type="checkbox" name="consent" id="consent" class="checkbox_before" checked)
+          +e.LABEL(for="consent").checkbox-label_after
+            +e.SPAN.checkbox-title
+              +e.SPAN.checkbox-subtitle
+                | Отправляя форму, я даю свое согласие на обработку моих персональных данных, в соответствии с Федеральным законом от 27.07.2006 года №152-ФЗ «О персональных данных», на условиях и для целей, определенных в
+          BUTTON(type="button").consent-link.js-consent Согласии на обработку персональных данных
+          +e.SPAN.messages
+        +e.container._btn          
+          +e.BUTTON.btn-submit(type="submit")  Отправить   

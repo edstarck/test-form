@@ -1,0 +1,32 @@
+.success-msg {
+  width: 100%;
+  color: $color-secondary;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  &__title {
+    display: block;
+    margin: 15px 0;
+    font-size: 48px;
+    font-weight: normal;
+  }
+  &__cnt {
+    display: block;
+    margin: 15px 0;
+    font-size: 24px;
+    font-weight: 500;
+  }
+  &__replay {
+    display: block;
+    margin: 15px 0;
+    font-size: 24px;
+    font-weight: 500;
+  }
+}
