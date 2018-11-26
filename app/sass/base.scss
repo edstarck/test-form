@@ -1,0 +1,110 @@
+@import 'variables';
+
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  color: #000000;
+  font-family: $font-primary;
+  font-size: $font-size;
+  line-height: $line-height;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+}
+
+strong {
+  font-family: $font-bold;
+  font-weight: bold;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: $listStyle;
+}
+
+input[type='text'],
+input[type='password'],
+select,
+textarea {
+  outline: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.jumbotron {
+  position: relative;
+  margin-top: 25px;
+  flex: 1 0 auto;
+  @media (max-width: $md) {
+    margin-top: 0;
+  }
+  &__title {
+    font-size: 17px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    @media (max-width: $md) {
+      display: none;
+    }
+    &_xs {
+      display: none;
+      font-size: 17px;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      @media (max-width: $md) {
+        display: block;
+      }
+    }
+  }
+  p {
+    margin-bottom: 23px;
+  }
+}
+.container {
+  max-width: 730px;
+  margin: 0 auto;
+  padding: 0 25px;
+}
+.proposal {
+  margin-top: 50px;
+  margin-bottom: 90px;
+  @media (max-width: $sm) {
+    margin-bottom: 0;
+  }
+}
+.footer {
+  flex: 0 0 auto;
+}
+
+::-webkit-input-placeholder {
+  font-family: $font-light;
+  font-size: 20px;
+  color: $gray;
+}
+::-moz-input-placeholder {
+  font-family: $font-light;
+  font-size: 20px;
+  color: $gray;
+}
+::-ms-input-placeholder {
+  font-family: $font-light;
+  font-size: 20px;
+  color: $gray;
+}

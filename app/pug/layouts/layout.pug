@@ -1,0 +1,22 @@
+include ../../../bemto/bemto
+
+include ../mixins
+include ../../blocks/header/header
+include ../../blocks/jumbotron/jumbotron
+include ../../blocks/footer/footer
+include ../../blocks/popup/popup
+
+<!DOCTYPE html>
+html(lang="en")
+  include head
+  body
+    .popup_main_content
+      +header
+      .wrapper      
+        block content
+        +jumbotron
+        +footer
+    +popup
+  block scripts
+    script(type="text/javascript" src="./js/libs.js")
+    script(type="text/javascript" src="./js/common.js")

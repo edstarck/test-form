@@ -1,0 +1,184 @@
+//- BREADCRUMBS
+//- ================================================
+mixin breadcrumbs(items, last)
+  +b.breadcrumb
+    +e.UL.list&attributes(attributes)
+      each item in items
+        +e.item
+          // if breadcrumb is single
+          if (items.length === 1 && !last)
+            +e.SPAN.link= item
+          else
+            +e.A.link._active(href="#" title=item)= item
+              +icon("breabcrumbs-arrow").__icon
+      if last
+        +e.item
+          +e.SPAN.link._current= last
+
+//- AUTH
+//- ================================================
+mixin auth
+  +b.UL.auth&attributes(attributes)
+    +e.LI.login
+      a.popup-js(href="#popup-login") Войти
+    +e.LI.register
+      a.popup-js(href="#popup-sign-up") Регистрация
+
+//- ???
+//- ================================================
+mixin menu-list
+  - var menu_items = ['О нас', 'Отзывы', 'Оплата', 'Доставка', 'Магазины ', 'Советы экспертов', 'Покупателям', ''];
+  +b.menu-list&attributes(attributes)
+    +e.UL.items
+      each item in menu_items
+        +e.LI.item
+          +e.A.link(href="#") #{item}
+
+mixin dropdown(items)
+  +b.UL.dropdown&attributes(attributes)
+    each item in items
+      if item.closed
+        +e.LI.item_closed.__title
+          span= item.name
+          +icon("dropdown-icon").__icon
+      else if item.arrow
+        +e.LI.item.__title
+          span= item.name
+          +icon("dropdown-icon").__icon
+      else if item.url
+        +e.LI.item
+          if(item.active)
+            +e.link._active(href=item.url)= item.name
+          else
+            +e.link(href=item.url)= item.name
+            if item.info
+              +e.SPAN.info= item.info
+      else
+        +e.LI.item= item.name
+      if (item.childrens)
+        +e.UL.item.__list._change
+          +dropdown(item.childrens)
+
+mixin currency
+  +b.currency&attributes(attributes)
+    +e.key Валюта:
+    +e.val rub
+
+//- HEADER
+//- ================================================
+mixin delivery-dropdowns
+  +b.delivery-dropdowns&attributes(attributes)
+    +e.A.__item.popup-solo-js(href="#popup-city-hint") Москва
+      +icon("dropdown-bottom-icon").dropdown__icon
+    +e.A.__item.popup-js(href="#popup-city") м. Алексеевская
+      +icon("dropdown-bottom-icon").dropdown__icon
+
+
+//- PICTURE
+//- ================================================
+mixin img(url)
+  img(src= "./img/" + url)&attributes(attributes)
+
+//- ДЛЯ ВЫПАДАШЕК В ГОРИЗОНТАЛЬНОМ МЕНЮ
+//- ================================================
+mixin list(name, items)
+  +b(class=name)
+    for item in items
+      +e.A.item(href="#")= item
+    if block
+      block
+
+//- FORM MIXINS
+//- ================================================
+mixin input(item)
+  +b.input&attributes(attributes)
+    .input-container
+      input(type = item.type id = item.id)
+      label(for = item.id)= item.label
+      if item.error
+        .bar.error
+      else
+        .bar
+    if item.error_message
+      +e.error-message= item.error_message
+
+mixin checkbox(checkbox_id, text, value)
+  +b.checkbox&attributes(attributes)
+    +e.LABEL.label(for=checkbox_id)
+      if value
+        +e.INPUT(type="checkbox", id=checkbox_id, value=text)
+      else
+        +e.INPUT(type="checkbox", id=checkbox_id)
+      +e.icon
+        +icon("checkbox-active").checkbox-icon
+      +e.text= text
+
+mixin button(title, link)
+  +e.A.button.button(href=(link ? link : "javascript:void(0)"))&attributes(attributes) #{title}
+
+//- SPRITE
+//- ================================================
+mixin icon(icon)
+  +b.SVG.icon&attributes(attributes)
+    use(xlink:href="./icons/icons.svg#" + icon)
+
+//- SOCIAL ICONS
+//- ================================================
+mixin social-icons(social_items)
+  +b.UL.social-icons&attributes(attributes)
+    for link, social in social_items
+      +e.LI.icon
+        +e.A.link(href=link, target="_blank", class="_"+social)
+          +icon(social)._w(class="icon-"+social+"_w")
+
+//- SOCIAL WIDGETS
+//- ================================================
+mixin social-widgets(vk_id)
+  +b.social-widgets&attributes(attributes)
+    +e.widget
+      // VK widget
+      script(type="text/javascript" src="//vk.com/js/api/openapi.js?146")
+      div(id="vk_groups" + vk_id)
+      script.
+        VK.Widgets.Group("vk_groups#{vk_id}", {mode: 3}, 40640660);
+    +e.widget
+      .youtube1
+        iframe(id="youtube-widget" style="overflow: hidden; height: 128px; border: 0pt none;" src="http://www.youtube.com/subscribe_widget?p=FitbarTv" width="200" height="128")
+
+//- TESTIMONIALS
+//- ================================================
+mixin testimonials-item
+  +b.testimonials-item&attributes(attributes)
+    +e.header
+      +e.ava
+        +img("user-ava.png")
+      +e.right
+        +e.title Михаил Литвинов
+        +e.date-time 25 сен 2016, 13:40
+    +rating
+    +e.info.
+      Fitbar нравится своим ассортиментом, ценами, акциями и оперативным обслуживанием. Заказ принимают без задержек …
+
+//- RATING
+//- ================================================
+mixin rating(counter)
+  +b.UL.rating&attributes(attributes)
+    each item in [1,2,3,4]
+      +e.LI.item
+        +icon("star-active").rating__icon
+    +e.LI.item
+      +icon("star").rating__icon
+  if counter==true
+    +e.SPAN.counter (34)
+
+//- SUBSCRIPTION
+//- ================================================
+mixin subscription
+  +b.subscription&attributes(attributes)
+    .wrap
+      +e.title.title АКЦИИ И СКИДКИ
+      +e.subtitle.subtitle.
+        Получайте новости обо всех горячих акциях, скидках и покупайте спортивные продукты по самым выгодным ценам:
+      +e.form
+        +e.INPUT.field.field(type="text" placeholder="Введите свой e-mail")._round
+        +button("Получать акции и скидки")._pink
